@@ -1,0 +1,14 @@
+{
+  "name": "nodejs-in-action",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "later": "node ./3.later"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "htmlparser": "^1.7.7",
+    "request": "^2.88.0"
+  }
+}
