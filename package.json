@@ -4,18 +4,24 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "later": "node 3.later"
+    "later": "node 3.later",
+    "express": "node ./6.2.express/./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "connect": "^3.6.6",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "htmlparser": "^1.7.7",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
     "node-readability": "^3.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "redis": "^2.8.0",
     "request": "^2.88.0",
     "sqlite3": "^4.0.6"
   },
