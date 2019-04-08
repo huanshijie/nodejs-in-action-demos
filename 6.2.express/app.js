@@ -5,7 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var entries = require('./routes/entries');
+var register = require('./routes/register');
 var validate = require('./middleware/validate');
+var messages = require('./middleware/messages');
+var session = require('express-session');
 
 var app = express();
 
@@ -17,6 +20,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(
+  session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
+  }),
+);
+app.use(messages);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', entries.list);
@@ -27,6 +38,8 @@ app.post(
   validate.lengthAbove('entry[title]', 4),
   entries.submit,
 );
+app.get('/register', register.form);
+app.post('/register', register.submit);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
