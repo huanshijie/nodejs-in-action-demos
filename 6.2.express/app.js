@@ -3,12 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
-var entries = require('./routes/entries');
-var register = require('./routes/register');
 var validate = require('./middleware/validate');
 var messages = require('./middleware/messages');
-var session = require('express-session');
+var user = require('./middleware/user');
+var entries = require('./routes/entries');
+var register = require('./routes/register');
+var login = require('./routes/login');
 
 var app = express();
 
@@ -27,8 +29,9 @@ app.use(
     saveUninitialized: true,
   }),
 );
-app.use(messages);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(user);
+app.use(messages);
 
 app.get('/', entries.list);
 app.get('/post', entries.form);
@@ -40,6 +43,9 @@ app.post(
 );
 app.get('/register', register.form);
 app.post('/register', register.submit);
+app.get('/login', login.form);
+app.post('/login', login.submit);
+app.get('/logout', login.logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
