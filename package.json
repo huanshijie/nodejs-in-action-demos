@@ -8,6 +8,7 @@
     "express": "node ./6.2.express/./bin/www"
   },
   "dependencies": {
+    "basic-auth": "^2.0.1",
     "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
