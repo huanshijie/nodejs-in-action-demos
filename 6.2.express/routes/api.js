@@ -23,6 +23,26 @@ exports.entries = (req, res, next) => {
   const page = req.page;
   Entry.getRange(page.from, page.to, (err, entries) => {
     if (err) return next(err);
-    res.json(entries);
+    res.format({
+      'application/json': () => {
+        res.send(entries);
+      },
+      'application/xml': () => {
+        res.render('entries/xml', { entries });
+        // res.write('<entries>\n');
+        // entries.forEach(entry => {
+        //   res.write(
+        //     ```
+        //     <entry>
+        //       <title>${entry.title}</title>
+        //       <body>${entry.body}</body>
+        //       <username>${entry.username}</username>
+        //     </entry>
+        //     ```,
+        //   );
+        // });
+        // res.end('</entries>');
+      },
+    });
   });
 };
